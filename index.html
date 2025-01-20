@@ -1,1 +1,64 @@
+<html>
+<head>
+  <style>
+    /* Centrer le flow */
+    .flow-container {
+      display: flex;
+      justify-content: center; /* Centrage horizontal */
+      align-items: center;    /* Centrage vertical */
+      height: 100vh;          /* Prend toute la hauteur de la fenêtre */
+      background-color: #f9f9f9; /* Couleur d'arrière-plan (facultatif) */
+    }
 
+    /* Limiter la taille du flow */
+    .flow-wrapper {
+      width: 60%;  /* Largeur maximale du flow */
+      max-width: 600px; /* Limite de largeur */
+      background: white; /* Fond blanc pour le flow */
+      border: 1px solid #ddd; /* Bordure légère */
+      border-radius: 8px; /* Coins arrondis */
+      padding: 20px; /* Espacement interne */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Conteneur principal centré -->
+  <div class="flow-container">
+    <!-- Wrapper pour réduire la taille du flow -->
+    <div class="flow-wrapper" data-lightning-out="true"></div>
+  </div>
+
+  <!-- Script pour intégrer le flow -->
+  <script src="https://medespoir2024--uat.sandbox.my.salesforce-sites.com/lightning/lightning.out.js"></script>
+  <script>
+    // Extraction du domaine
+    const fullDomain = 'aram';
+    console.log('Extracted domain name:', fullDomain);
+
+    const appName = 'c:embedFlowApp';
+    const componentName = 'c:embedFlow';
+    const lightningEndpoint = 'https://medespoir2024--uat.sandbox.my.salesforce-sites.com';
+    const targetElement = document.querySelector("[data-lightning-out]");
+    const componentAttributes = {
+      domainName: fullDomain
+    };
+
+    $Lightning.use(
+      appName,
+      function () {
+        $Lightning.createComponent(
+          componentName,
+          componentAttributes,
+          targetElement,
+          function (cmp) {
+            console.log('lightning component created');
+          }
+        );
+      },
+      lightningEndpoint
+    );
+  </script>
+</body>
+</html>
