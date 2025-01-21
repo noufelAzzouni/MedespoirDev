@@ -34,7 +34,9 @@
   <script src="https://medespoir2024--dev.sandbox.my.salesforce-sites.com/lightning/lightning.out.js"></script>
   <script>
     // Extraction du domaine
-    const fullDomain = 'aram';
+    const fullDomain = window.location.hostname;
+    const showLogo = true;
+    const entityName = 'aram';
     console.log('Extracted domain name:', fullDomain);
 
     const appName = 'c:embedFlowApp';
@@ -42,23 +44,27 @@
     const lightningEndpoint = 'https://medespoir2024--dev.sandbox.my.salesforce-sites.com';
     const targetElement = document.querySelector("[data-lightning-out]");
     const componentAttributes = {
-      domainName: fullDomain
+      domainName: fullDomain,
+      showLogo: showLogo,
+      entity: entityName
     };
 
     $Lightning.use(
-      appName,
-      function () {
-        $Lightning.createComponent(
-          componentName,
-          componentAttributes,
-          targetElement,
-          function (cmp) {
-            console.log('lightning component created');
-          }
-        );
-      },
-      lightningEndpoint
+            appName,
+            function (){
+              $Lightning.createComponent(
+                      componentName,
+                      componentAttributes,
+                      targetElement,
+                      function (cmp){
+                        console.log('lightning component created');
+                      }
+              );
+            },
+            lightningEndpoint
     );
+
+
   </script>
 </body>
 </html>
